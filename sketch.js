@@ -8,6 +8,7 @@ var biribinha;
 var engine, world, ground;
 var figurinha;
 var castelo, casteloImg;
+var bomba;
 
 function preload() {
   figurinha = loadImage("./assets/background.gif");
@@ -29,8 +30,11 @@ function setup() {
 
  castelo = Bodies.rectangle(160, 350, 160, 310, options);
  World.add(world,castelo);
+ angleMode(DEGREES);
  angulo = 20;
  biribinha = new Biribinha(180,110,130,100,angulo);
+
+ bomba = new Bomba(biribinha.posX, biribinha.posY);
  
 }
 
@@ -47,4 +51,10 @@ function draw() {
  image(casteloImg,castelo.position.x, castelo.position.y, 160, 310);
  pop();
    biribinha.mostrar();
+   bomba.mostrar();
+}
+function keyReleased(){
+  if(keyCode === 32){
+    bomba.pular();
+  }
 }
