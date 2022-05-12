@@ -10,10 +10,10 @@ class Biribinha {
     }
 
     mostrar(){
-        if(keyIsDown(UP_ARROW)&&this.ang>-30){
+        if(keyIsDown(UP_ARROW)&&this.ang>-30 || keyDown("w")&&this.ang>-30){
             this.ang-=1;
         }
-        if(keyIsDown(DOWN_ARROW)&&this.ang<70){
+        if(keyIsDown(DOWN_ARROW)&&this.ang<70 || keyDown("s")&&this.ang<70){
             this.ang+=1;
         }
      push();

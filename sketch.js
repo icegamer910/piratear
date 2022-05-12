@@ -1,3 +1,26 @@
+//Revisão de Matrizes
+//Matriz: variável que pode armazenar vários valores
+//Exemplos de Matrizes
+var matriz1 = [20,385,14,56];
+//console.log(matriz1);
+
+var matriz2 = ["Melissa", 26, "Lucas", true];
+//console.log(matriz2);
+
+var matriz3 = [[23,57]     ,      [78,12]];
+//console.log(matriz3);
+
+//console.log(matriz1[2]);
+//console.log(matriz2[1]);
+//console.log(matriz3[0][1]);
+
+matriz1.push(1000);
+matriz1.push(520);
+//console.log(matriz1);
+
+
+
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
@@ -9,6 +32,7 @@ var engine, world, ground;
 var figurinha;
 var castelo, casteloImg;
 var bomba;
+var baladecanhao=[];
 
 function preload() {
   figurinha = loadImage("./assets/background.gif");
@@ -34,7 +58,7 @@ function setup() {
  angulo = 20;
  biribinha = new Biribinha(180,110,130,100,angulo);
 
- bomba = new Bomba(biribinha.posX, biribinha.posY);
+ 
  
 }
 
@@ -51,10 +75,23 @@ function draw() {
  image(casteloImg,castelo.position.x, castelo.position.y, 160, 310);
  pop();
    biribinha.mostrar();
-   bomba.mostrar();
+   for(var i=0; i<baladecanhao.length;i++ ){
+     fogodeartificio(baladecanhao[i],i)
+   }
 }
 function keyReleased(){
   if(keyCode === 32){
-    bomba.pular();
+    baladecanhao[baladecanhao.length-1].pular();
+  }
+}
+function keyPressed(){
+  if(keyCode === 32){
+    var bomba = new Bomba(biribinha.posX, biribinha.posY);
+    baladecanhao.push(bomba)
+  }
+}
+function fogodeartificio (bomba,i ){
+  if(bomba){
+    bomba.mostrar();
   }
 }
