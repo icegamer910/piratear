@@ -33,6 +33,8 @@ var figurinha;
 var castelo, casteloImg;
 var bomba;
 var baladecanhao=[];
+var invasor;
+var bando=[];
 
 function preload() {
   figurinha = loadImage("./assets/background.gif");
@@ -78,6 +80,8 @@ function draw() {
    for(var i=0; i<baladecanhao.length;i++ ){
      fogodeartificio(baladecanhao[i],i)
    }
+
+   bandoep()
 }
 function keyReleased(){
   if(keyCode === 32){
@@ -94,4 +98,24 @@ function fogodeartificio (bomba,i ){
   if(bomba){
     bomba.mostrar();
   }
+}
+function bandoep (){
+if (bando.length>0){
+  var randola=random(250,300);
+  if(bando[bando.length-1] === undefined || bando[bando.length-1].corpo.position.x<width-randola){
+    var pos=[-40,-60,-70,-20];
+    var pos2=random(pos);
+    var invasor = new Invasor(width, height-100, 170, 170, pos2);
+    bando.push(invasor);
+  }
+  for(var i=0; i<bando.length;i++ ){
+    if(bando[i]){
+      Matter.Body.setVelocity(bando[i].corpo, {x: -0.9,y: 0});
+      bando[i].mostrar();
+    }
+  }
+}else{
+ var invasor = new Invasor(width, height-60, 170, 170, -80);
+ bando.push(invasor);
+}
 }
