@@ -79,6 +79,7 @@ function draw() {
    biribinha.mostrar();
    for(var i=0; i<baladecanhao.length;i++ ){
      fogodeartificio(baladecanhao[i],i)
+     esbarrar(i);
    }
 
    bandoep()
@@ -97,6 +98,9 @@ function keyPressed(){
 function fogodeartificio (bomba,i ){
   if(bomba){
     bomba.mostrar();
+    if(bomba.corpo.position.x>=width||bomba.corpo.position.y>=height-50){
+      bomba.sumiu(i);
+    }
   }
 }
 function bandoep (){
@@ -119,3 +123,16 @@ if (bando.length>0){
  bando.push(invasor);
 }
 }
+function esbarrar(index){
+  for(var i=0; i<bando.length;i++ ){
+    if(baladecanhao[index]!== undefined && bando[i]!== undefined){
+      var colizao=Matter.SAT.collides(baladecanhao[index].corpo,bando[i].corpo)
+        if(colizao.collided){
+          bando[i].sumiu(i);
+          Matter.World.remove(world,baladecanhao[index].corpo);
+          delete baladecanhao[index];
+        }
+      }
+    }
+
+  }

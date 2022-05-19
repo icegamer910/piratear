@@ -19,4 +19,11 @@ class Invasor {
         image(this.imagem, 0, this.invasorPosition, this.lar, this.alt);
         pop();
     }
+    sumiu(index){
+        setTimeout(()=>{
+            Matter.World.remove(world,bando[index].corpo);
+            delete bando[index];
+        },2000)
+       
+    }
 }
