@@ -35,10 +35,19 @@ var bomba;
 var baladecanhao=[];
 var invasor;
 var bando=[];
+var bandoAnimation = [];
+var bandoDados, bandoSpritesheet;
+var falhainvasao=[];
+var falhainvasaodados;
+var tibum;
 
 function preload() {
   figurinha = loadImage("./assets/background.gif");
   casteloImg = loadImage("./assets/tower.png");
+  bandoDados = loadJSON("./assets/boat/boat.json");
+  bandoSpritesheet = loadImage("./assets/boat/boat.png");
+  falhainvasaodados = loadJSON("./assets/boat/brokenBoat.json");
+  tibum = loadImage("./assets/boat/brokenBoat.png");
 }
 
 function setup() {
@@ -60,8 +69,20 @@ function setup() {
  angulo = 20;
  biribinha = new Biribinha(180,110,130,100,angulo);
 
+ var bandoFrames = bandoDados.frames;
  
+ for(var i = 0; i < bandoFrames.length; i++){
+   var pos = bandoFrames[i].position;
+   var img = bandoSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
+   bandoAnimation.push(img);
+ }
+ var tibumframes = falhainvasaodados.frames;
  
+ for(var i = 0; i < tibumframes.length; i++){
+   var pos = tibumframes[i].position;
+   var img = tibum.get(pos.x, pos.y, pos.w, pos.h);
+   falhainvasao.push(img);
+ }
 }
 
 function draw() {
@@ -109,17 +130,18 @@ if (bando.length>0){
   if(bando[bando.length-1] === undefined || bando[bando.length-1].corpo.position.x<width-randola){
     var pos=[-40,-60,-70,-20];
     var pos2=random(pos);
-    var invasor = new Invasor(width, height-100, 170, 170, pos2);
+    var invasor = new Invasor(width, height-100, 170, 170, pos2, bandoAnimation);
     bando.push(invasor);
   }
   for(var i=0; i<bando.length;i++ ){
     if(bando[i]){
       Matter.Body.setVelocity(bando[i].corpo, {x: -0.9,y: 0});
       bando[i].mostrar();
+      bando[i].animar();
     }
   }
 }else{
- var invasor = new Invasor(width, height-60, 170, 170, -80);
+ var invasor = new Invasor(width, height-60, 170, 170, -80, bandoAnimation);
  bando.push(invasor);
 }
 }
