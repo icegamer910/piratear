@@ -49,6 +49,8 @@ var paisagem
 var mais1dia
 var tiropelaculatra
 var impostoderenda = false
+//var corpopirata
+//var imagempirata
 
 function preload() {
   figurinha = loadImage("./assets/background.gif");
@@ -63,6 +65,7 @@ function preload() {
   paisagem = loadSound("./assets/background_music.mp3");
   tiropelaculatra = loadSound("./assets/cannon_water.mp3");
   contas = loadSound("./assets/pirate_laugh.mp3");
+  //imagempirata = loadImage("./assets/pirata.png");
 }
 
 function setup() {
@@ -77,6 +80,9 @@ function setup() {
  
  ground= Bodies.rectangle(0,height-1, width*2,1,options);
  World.add(world,ground);
+
+  //corpopirata = bodies.rectangle()
+  //World.add(world,corpopirata)
 
  castelo = Bodies.rectangle(160, 350, 160, 310, options);
  World.add(world,castelo);
@@ -131,7 +137,7 @@ function draw() {
    }
 
    bandoep()
-}
+   }
 function keyReleased(){
   if(keyCode === 32){
     mais1dia.play();
@@ -216,6 +222,8 @@ function esbarrar(index){
         if(botaoApertado){
           location.reload();
         }
-      }
-    )
+        }
+    //image(imagempirata,posX=155,posY=432,lar=1,alt=1)
+
+    ) 
   }
